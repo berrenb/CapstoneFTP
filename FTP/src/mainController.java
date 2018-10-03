@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.File;
 
 
+
 public class mainController {
 
     @FXML
@@ -53,6 +54,7 @@ public class mainController {
         The purpose of this method is to get the text contents from the TextFields
         when the Go button is pressed
      */
+
     public void getContents() {
         //Gets the contents in hostId TextField
         hostID.getText();
