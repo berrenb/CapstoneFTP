@@ -1,51 +1,9 @@
 <component name="libraryTable">
   <library name="examples">
-    <CLASSES />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../apache-commons-net.jar!/" />
+    </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples/cidr" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples/ftp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples/mail" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples/nntp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples/ntp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples/telnet" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples/unix" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/examples/util" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/bsd" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/chargen" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/daytime" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/discard" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/echo" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/finger" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/ftp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/ftp/parser" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/imap" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/io" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/nntp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/ntp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/pop3" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/smtp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/telnet" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/tftp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/time" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/util" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/main/java/org/apache/commons/net/whois" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/examples" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/ftp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/ftp/parser" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/imap" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/io" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/nntp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/ntp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/pop3" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/smtp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/telnet" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/tftp" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/time" />
-      <root url="file://$PROJECT_DIR$/src/commons-net-3.6-src/src/test/java/org/apache/commons/net/util" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

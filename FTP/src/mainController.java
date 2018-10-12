@@ -15,8 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import org.apache.commons.net.ftp.FTPReply;
+import org.apache.commons.net.ftp.FTPClient;
 
+import java.io.File;
+import java.io.IOException;
 
 
 public class mainController {
@@ -48,23 +51,54 @@ public class mainController {
     @FXML
     private ProgressBar status;
 
+    //Variables needed for connection to the server
+    FTPClient ftp =null;
+    String host = null;
+    String user = null;
+    int port = 0;
+    String pass = null;
+    int reply = 0;
 
     /*
-        The method, getContents, takes no arguments and doesn't return anything.
-        The purpose of this method is to get the text contents from the TextFields
-        when the Go button is pressed
+        The method, clientConnect, takes no arguments and doesn't return anything.
+        The purpose of this method is to establish a connection to the client.
+        The method will get the text contents from the TextFields when the Go button is pressed.
+        Once the content is obtained, the method will attempt to connect to the host.
      */
 
-    public void getContents() {
+    public void clientConnect() throws IOException {
         //Gets the contents in hostId TextField
-        hostID.getText();
+        host = hostID.getText();
         //Gets the contents in userID TextField
-        userID.getText();
+        user = userID.getText();
         //Gets the contents in passID TextField
-        passID.getText();
+        pass = passID.getText();
         //Gets the contents in portID TextField
-        portID.getText();
-    }
+        port = Integer.parseInt(portID.getText());
+
+        //Creates an FTP Client
+        ftp = new FTPClient();
+
+        //Connects to the host
+        ftp.connect(host);
+
+        //Obtains the reply code
+        reply = ftp.getReplyCode();
+
+        //If the reply code is negative value, the connection failed
+        if (!FTPReply.isPositiveCompletion(reply)) {
+            ftp.disconnect();
+            System.out.println("Connect failed");
+        }
+
+        //If the connection is successful, login
+        else {
+            System.out.println("Connection Successful!");
+            ftp.login(user, pass);
+        }
+
+
+        }
 
     /*
         The method, openFolder, takes no arguments and doesn't return anything.
@@ -131,14 +165,7 @@ public class mainController {
         System.exit(0);
     }
 
-    /*
-        The method, openClient, takes no arguments and does not return anything.
-        The purpose of this method is to open the file directory of the website client.
-     */
-    public void openClient() {
 
-
-    }
 }
 
 
