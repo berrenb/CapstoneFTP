@@ -15,11 +15,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.ftp.FTPClient;
 
 import java.io.File;
 import java.io.IOException;
+
 
 
 public class mainController {
@@ -46,18 +48,18 @@ public class mainController {
     private ListView<String> myFolder;
 
     @FXML
-    private ListView<?> myServerFolder;
+    private ListView<String> myServerFolder;
 
     @FXML
     private ProgressBar status;
 
     //Variables needed for connection to the server
-    FTPClient ftp =null;
-    String host = null;
-    String user = null;
-    int port = 0;
-    String pass = null;
-    int reply = 0;
+    private FTPClient ftp =null;
+    private String host = null;
+    private String user = null;
+    private int port = 0;
+    private String pass = null;
+    private int reply = 0;
 
     /*
         The method, clientConnect, takes no arguments and doesn't return anything.
@@ -76,6 +78,8 @@ public class mainController {
         //Gets the contents in portID TextField
         port = Integer.parseInt(portID.getText());
 
+
+
         //Creates an FTP Client
         ftp = new FTPClient();
 
@@ -88,14 +92,39 @@ public class mainController {
         //If the reply code is negative value, the connection failed
         if (!FTPReply.isPositiveCompletion(reply)) {
             ftp.disconnect();
-            System.out.println("Connect failed");
+            //Creates an Information Alert
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            //Sets the title of the Alert dialog
+            alert.setTitle("ERROR");
+            //Sets the alert header to null
+            alert.setHeaderText(null);
+            //The contents of the alert
+            alert.setContentText("There was an issue connecting. Please try again");
+            //The alert will be displayed until the OK button is clicked
+            alert.showAndWait();
         }
+
 
         //If the connection is successful, login
         else {
-            System.out.println("Connection Successful!");
-            ftp.login(user, pass);
+            //Creates an Information Alert
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            //Sets the title of the Alert dialog
+            alert.setTitle("SUCCESS");
+            //Sets the alert header to null
+            alert.setHeaderText(null);
+            //The contents of the alert
+            alert.setContentText("You're connected to: " + host);
+            //The alert will be displayed until the OK button is clicked
+            alert.showAndWait();
         }
+
+
+
+            
+            ftp.login(user, pass);
+
+
 
 
         }
@@ -105,7 +134,7 @@ public class mainController {
         The purpose of this method is to open a folder, and lists its content
         into the ListView, myFolder.
      */
-    public void openFolder() {
+    public void openFolder(){
         //Creates a DirectoryChooser
         final DirectoryChooser dir = new DirectoryChooser();
 
@@ -118,6 +147,11 @@ public class mainController {
         //Creates an ObservableList which will store the files in the directory
         ObservableList<String> fileList = FXCollections.observableArrayList();
 
+
+        status.setProgress(0);
+
+
+
         //If there is content, display them into myFolder
         if (file != null) {
             //Adds the files to an array
@@ -125,10 +159,25 @@ public class mainController {
 
             //For each element of the array, files, add them to the fileList
             for (String string : files) {
+                status.setProgress(files.length);
                 fileList.add(string);
             }
+
             //Displays the items
             myFolder.setItems(fileList);
+
+            //Creates an Information Alert
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            //Sets the title of the Alert dialog
+            alert.setTitle("COMPLETE");
+            //Sets the alert header to null
+            alert.setHeaderText(null);
+            //The contents of the alert
+            alert.setContentText("Directory: " + file);
+            //The alert will be displayed until the OK button is clicked
+            alert.showAndWait();
+
+            status.setProgress(0);
         }
     }
 
