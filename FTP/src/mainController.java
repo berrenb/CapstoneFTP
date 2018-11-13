@@ -79,7 +79,7 @@ public class mainController {
         port = Integer.parseInt(portID.getText());
 
 
-
+    try {
         //Creates an FTP Client
         ftp = new FTPClient();
 
@@ -89,6 +89,11 @@ public class mainController {
         //Obtains the reply code
         reply = ftp.getReplyCode();
 
+        ftp.enterLocalPassiveMode();
+
+        ftp.login(user, pass);
+
+        System.out.println(ftp.getStatus());
         //If the reply code is negative value, the connection failed
         if (!FTPReply.isPositiveCompletion(reply)) {
             ftp.disconnect();
@@ -118,12 +123,53 @@ public class mainController {
             //The alert will be displayed until the OK button is clicked
             alert.showAndWait();
         }
+        if (ftp.login(user, pass) == false){
+            ftp.disconnect();
+            //Creates an Information Alert
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            //Sets the title of the Alert dialog
+            alert.setTitle("ERROR");
+            //Sets the alert header to null
+            alert.setHeaderText(null);
+            //The contents of the alert
+            alert.setContentText("The username or password was incorrect");
+            //The alert will be displayed until the OK button is clicked
+            alert.showAndWait();
+
+            userID.setText("");
+            passID.setText("");
+
+        }
+        else{
+            //Creates an Information Alert
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            //Sets the title of the Alert dialog
+            alert.setTitle("SUCCESS");
+            //Sets the alert header to null
+            alert.setHeaderText(null);
+            //The contents of the alert
+            alert.setContentText("The username and password was correct!");
+            //The alert will be displayed until the OK button is clicked
+            alert.showAndWait();
+
+        }
 
 
 
-            
-            ftp.login(user, pass);
-
+    }
+    catch(Exception e) {
+        ftp.disconnect();
+        //Creates an Information Alert
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        //Sets the title of the Alert dialog
+        alert.setTitle("ERROR");
+        //Sets the alert header to null
+        alert.setHeaderText(null);
+        //The contents of the alert
+        alert.setContentText("I'm sorry. There was an unknown error");
+        //The alert will be displayed until the OK button is clicked
+        alert.showAndWait();
+    }
 
 
 

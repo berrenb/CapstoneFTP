@@ -19,7 +19,7 @@
       <Label layoutX="166.0" layoutY="23.0" text="User" AnchorPane.topAnchor="40.0" />
       <Label layoutX="316.0" layoutY="23.0" text="Password" AnchorPane.topAnchor="40.0" />
       <PasswordField fx:id="passID" layoutX="371.0" layoutY="36.0" prefHeight="25.0" prefWidth="98.0" AnchorPane.topAnchor="40.0" />
-      <TextField fx:id="portID" layoutX="529.0" layoutY="40.0" prefHeight="25.0" prefWidth="36.0" text="22" AnchorPane.topAnchor="40.0" />
+      <TextField fx:id="portID" layoutX="529.0" layoutY="40.0" prefHeight="25.0" prefWidth="36.0" text="21" AnchorPane.topAnchor="40.0" />
       <Label layoutX="498.0" layoutY="44.0" text="Port" AnchorPane.topAnchor="40.0" />
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -40,5 +40,7 @@
       <ListView fx:id="myFolder" layoutX="14.0" layoutY="153.0" prefHeight="239.0" prefWidth="275.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
       <ListView fx:id="myServerFolder" layoutX="313.0" layoutY="153.0" prefHeight="239.0" prefWidth="275.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <ProgressBar fx:id="status" layoutX="11.0" layoutY="92.0" prefHeight="18.0" prefWidth="578.0" progress="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+      <Label layoutX="463.0" layoutY="126.0" text="Server Directory" />
+      <Label layoutX="101.0" layoutY="126.0" text="Remote Directory" />
    </children>
 </AnchorPane>
