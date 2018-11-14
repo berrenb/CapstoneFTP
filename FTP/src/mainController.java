@@ -84,14 +84,33 @@ public class mainController {
         ftp = new FTPClient();
 
         //Connects to the host
-        ftp.connect(host);
+        ftp.connect(host, port);
 
+        System.out.println(ftp.getReplyString());
+        //login into server
+        ftp.login(user, pass);
+
+
+        //Creates an ObservableList which holds folders/files in the directory
+        ObservableList<String> fileList = FXCollections.observableArrayList();
+
+
+        status.setProgress(0);
+
+
+        String[] names = ftp.listNames();
+        myServerFolder.setItems(fileList);
+        for(String name : names){
+            fileList.add(name);
+        }
+        //Displays the items
+        myServerFolder.setItems(fileList);
         //Obtains the reply code
         reply = ftp.getReplyCode();
 
         ftp.enterLocalPassiveMode();
 
-        ftp.login(user, pass);
+
 
         System.out.println(ftp.getStatus());
         //If the reply code is negative value, the connection failed
@@ -154,6 +173,7 @@ public class mainController {
 
         }
 
+        System.out.println();
 
 
     }
@@ -243,7 +263,7 @@ public class mainController {
         //The contents of the alert
         alert.setContentText("This will perform a successful File transfer to my website." +
                 "\n" + "To do this, first select you local folder under file." + "\n" +
-                "Next, enter the host, username, and password to connect to the website directory. The port is defaulted to Port 22."
+                "Next, enter the host, username, and password to connect to the website directory. The port is defaulted to Port 21."
                 + "\n" + "Finally, select your file and drag it into the website directory");
         //The alert will be displayed until the OK button is clicked
         alert.showAndWait();
