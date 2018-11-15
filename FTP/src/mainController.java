@@ -15,13 +15,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.ftp.FTPClient;
 
-import java.io.File;
-import java.io.IOException;
-
+import java.util.Scanner;
+import java.io.*;
 
 
 public class mainController {
@@ -267,6 +267,89 @@ public class mainController {
                 + "\n" + "Finally, select your file and drag it into the website directory");
         //The alert will be displayed until the OK button is clicked
         alert.showAndWait();
+    }
+
+    public void uploadFile(){
+        try {
+
+            ftp.connect(host, port);
+            ftp.login(user, pass);
+            ftp.enterLocalPassiveMode();
+
+            ftp.setFileType(FTP.BINARY_FILE_TYPE);
+
+            Scanner scan = new Scanner(System.in);
+            // APPROACH #1: uploads first file using an InputStream "C:/Users/Bryan/Documents/please.txt"
+            System.out.println("Enter a file path: ");
+            File firstLocalFile = new File(scan.nextLine());
+
+            //"/httpdocs/please.txt"
+            System.out.println("Enter the remote file destination path");
+            String firstRemoteFile = scan.nextLine();
+            InputStream inputStream = new FileInputStream(firstLocalFile);
+
+            System.out.println("Start uploading first file");
+            boolean done = ftp.storeFile(firstRemoteFile, inputStream);
+            inputStream.close();
+            if (done) {
+                System.out.println("The first file is uploaded successfully.");
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftp.isConnected()) {
+                    ftp.logout();
+                    ftp.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
+    public void downloadFile(){
+        try {
+            ftp.connect(host, port);
+            ftp.login(user, pass);
+            ftp.enterLocalPassiveMode();
+            ftp.setFileType(FTP.BINARY_FILE_TYPE);
+
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Enter the path of the remote file: ");
+            // APPROACH #1: using retrieveFile(String, OutputStream) "/httpdocs/index.html"
+            String remoteFile1 = scan.nextLine();
+
+            System.out.println("Enter the destination file path: ");
+            //"C:/Users/Bryan/Documents/FTPClient/index.html"
+            File downloadFile1 = new File(scan.nextLine());
+
+
+            OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile1));
+
+            boolean success = ftp.retrieveFile(remoteFile1, outputStream1);
+            outputStream1.close();
+
+            if (success) {
+                System.out.println("File #1 has been downloaded successfully.");
+            }
+        }
+        catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftp.isConnected()) {
+                    ftp.logout();
+                    ftp.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /*

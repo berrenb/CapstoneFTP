@@ -42,5 +42,7 @@
       <ProgressBar fx:id="status" layoutX="11.0" layoutY="92.0" prefHeight="18.0" prefWidth="578.0" progress="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
       <Label layoutX="463.0" layoutY="126.0" text="Server Directory" />
       <Label layoutX="101.0" layoutY="126.0" text="Remote Directory" />
+      <Button fx:id="upBtn" layoutX="305.0" layoutY="166.0" mnemonicParsing="false" onAction="#uploadFile" onMouseClicked="#clientConnect" prefHeight="25.0" prefWidth="36.0" text="--&gt;" />
+      <Button fx:id="downBtn" layoutX="305.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#downloadFile" prefHeight="25.0" prefWidth="36.0" text="&lt;--" />
    </children>
 </AnchorPane>
