@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FTP/ftpGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FTP/ftpGUI.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FTP/mainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FTP/mainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FTP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FTP.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ftpGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ftpGUI.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mainController.java" afterDir="false" />
     </list>
@@ -138,6 +138,27 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="48226778">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="539" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="539" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="JavaFxApplication" />
@@ -147,8 +168,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            <state relative-caret-position="34">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -159,11 +180,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="681">
-              <caret line="241" column="53" selection-start-line="241" selection-start-column="49" selection-end-line="241" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="2945">
+              <caret line="340" column="58" selection-start-line="340" selection-start-column="58" selection-end-line="340" selection-end-column="58" />
             </state>
           </provider>
         </entry>
@@ -191,10 +209,10 @@
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="245" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="243" />
     <option name="y" value="195" />
-    <option name="width" value="694" />
+    <option name="width" value="696" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -239,10 +257,10 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542238657423" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542723120202" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="last_opened_file_path" value="E:/jre-10.0.2" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
@@ -355,10 +373,9 @@
     <option name="totallyTimeSpent" value="1302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.09042553" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.094736844" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -367,7 +384,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33442622" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33274022" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -378,7 +395,7 @@
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32786885" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32740214" />
       <window_info anchor="bottom" id="Terminal" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -406,16 +423,10 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml" />
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java" />
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.java" />
     <entry file="file://$PROJECT_DIR$/src/ftpGUI.fxml">
-      <provider editor-type-id="text-editor" />
       <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
@@ -424,24 +435,12 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/commons-net-3.6-src/BUILDING.txt" />
-    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/Assign9.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/Loadable.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/Map.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/MapPane.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/PlayerPane.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/Player.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/Assign9.java" />
+    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/Loadable.java" />
+    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/Map.java" />
+    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/MapPane.java" />
+    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/PlayerPane.java" />
+    <entry file="file://$PROJECT_DIR$/../../CS249_Assignments/Assign9/src/Player.java" />
     <entry file="file://$PROJECT_DIR$/out/production/FTP/Main.class">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -450,13 +449,7 @@
         <state relative-caret-position="-1027" />
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/javafx.fxml/javafx/fxml/FXMLLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28356">
-          <caret line="1786" selection-start-line="1786" selection-end-line="1786" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/javafx.fxml/javafx/fxml/FXMLLoader.java" />
     <entry file="jar://$PROJECT_DIR$/../apache-commons-net.jar!/org/apache/commons/net/SocketClient.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -466,8 +459,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        <state relative-caret-position="34">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -476,11 +469,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="681">
-          <caret line="241" column="53" selection-start-line="241" selection-start-column="49" selection-end-line="241" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="2945">
+          <caret line="340" column="58" selection-start-line="340" selection-start-column="58" selection-end-line="340" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -513,6 +503,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
+          <last-edited>jre-10.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -541,7 +532,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

@@ -60,6 +60,8 @@ public class mainController {
     private int port = 0;
     private String pass = null;
     private int reply = 0;
+    private String localDir = null;
+    private String remoteDir = null;
 
     /*
         The method, clientConnect, takes no arguments and doesn't return anything.
@@ -97,6 +99,8 @@ public class mainController {
 
         status.setProgress(0);
 
+        remoteDir = ftp.printWorkingDirectory();
+        System.out.println(remoteDir);
 
         String[] names = ftp.listNames();
         myServerFolder.setItems(fileList);
@@ -216,8 +220,7 @@ public class mainController {
 
         status.setProgress(0);
 
-
-
+        localDir = file.toString();
         //If there is content, display them into myFolder
         if (file != null) {
             //Adds the files to an array
@@ -270,6 +273,10 @@ public class mainController {
     }
 
     public void uploadFile(){
+        final TextField localPath;
+
+        final TextField remotePath;
+
         try {
 
             ftp.connect(host, port);
@@ -278,18 +285,24 @@ public class mainController {
 
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
 
-            Scanner scan = new Scanner(System.in);
-            // APPROACH #1: uploads first file using an InputStream "C:/Users/Bryan/Documents/please.txt"
-            System.out.println("Enter a file path: ");
-            File firstLocalFile = new File(scan.nextLine());
+            Stage stage = (Stage) mainStage.getScene().getWindow();
 
-            //"/httpdocs/please.txt"
-            System.out.println("Enter the remote file destination path");
-            String firstRemoteFile = scan.nextLine();
-            InputStream inputStream = new FileInputStream(firstLocalFile);
+
+            Scanner scan = new Scanner(System.in);
+
+            // APPROACH #1: uploads first file using an InputStream
+            System.out.println("Enter the name of the file in the directory");
+            File localFile = new File(localDir + "/" +scan.nextLine());
+
+            System.out.println(localFile);
+
+
+            System.out.println("Enter the new name of the file on the remote directory");
+            String remoteFile = (remoteDir + "/" + scan.nextLine());
+            InputStream inputStream = new FileInputStream(localFile);
 
             System.out.println("Start uploading first file");
-            boolean done = ftp.storeFile(firstRemoteFile, inputStream);
+            boolean done = ftp.storeFile(remoteFile, inputStream);
             inputStream.close();
             if (done) {
                 System.out.println("The first file is uploaded successfully.");
@@ -319,18 +332,18 @@ public class mainController {
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
 
             Scanner scan = new Scanner(System.in);
-            System.out.println("Enter the path of the remote file: ");
+            System.out.println("Enter the name of the remote file: ");
             // APPROACH #1: using retrieveFile(String, OutputStream) "/httpdocs/index.html"
-            String remoteFile1 = scan.nextLine();
+            String remoteFile = (remoteDir + "/" + scan.nextLine());
 
             System.out.println("Enter the destination file path: ");
             //"C:/Users/Bryan/Documents/FTPClient/index.html"
-            File downloadFile1 = new File(scan.nextLine());
+            File downloadFile = new File(localDir + "/" + scan.nextLine());
 
 
-            OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile1));
+            OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile));
 
-            boolean success = ftp.retrieveFile(remoteFile1, outputStream1);
+            boolean success = ftp.retrieveFile(remoteFile, outputStream1);
             outputStream1.close();
 
             if (success) {
