@@ -97,7 +97,7 @@ public class mainController {
         ObservableList<String> fileList = FXCollections.observableArrayList();
 
 
-        status.setProgress(0);
+
 
         remoteDir = ftp.printWorkingDirectory();
         System.out.println(remoteDir);
@@ -220,6 +220,7 @@ public class mainController {
 
         status.setProgress(0);
 
+
         localDir = file.toString();
         //If there is content, display them into myFolder
         if (file != null) {
@@ -272,40 +273,70 @@ public class mainController {
         alert.showAndWait();
     }
 
+    /*
+        The method, uploadFile, does not take any arguments and does not return anything. The purpose of this
+        method is to upload a file from the local directory to the remote directory.
+     */
     public void uploadFile(){
-        final TextField localPath;
-
-        final TextField remotePath;
 
         try {
 
+            //Connect to the server
             ftp.connect(host, port);
+            status.setProgress(0);
+
+            //Login with the username and password
             ftp.login(user, pass);
+
+            //This line is used so you are able to transfer files
             ftp.enterLocalPassiveMode();
 
+            //Sets file type of files transferred
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
 
-            Stage stage = (Stage) mainStage.getScene().getWindow();
-
-
+            //Creates a new scanner object
             Scanner scan = new Scanner(System.in);
-
-            // APPROACH #1: uploads first file using an InputStream
             System.out.println("Enter the name of the file in the directory");
+
+            //Stores the file chosen in localFile
             File localFile = new File(localDir + "/" +scan.nextLine());
 
-            System.out.println(localFile);
-
-
             System.out.println("Enter the new name of the file on the remote directory");
+
+            //Stores the new name of the file to be uploaded to the server
             String remoteFile = (remoteDir + "/" + scan.nextLine());
             InputStream inputStream = new FileInputStream(localFile);
 
-            System.out.println("Start uploading first file");
+
+
+            //Creates an Confirmation Alert
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            //Sets the title of the Alert dialog
+            alert.setTitle(null);
+            //Sets the alert header to null
+            alert.setHeaderText(null);
+            //The contents of the alert
+            alert.setContentText("Beginning to upload "+ remoteFile);
+            //The alert will be displayed until the OK button is clicked
+            alert.showAndWait();
+
+
+
+
             boolean done = ftp.storeFile(remoteFile, inputStream);
             inputStream.close();
+
             if (done) {
-                System.out.println("The first file is uploaded successfully.");
+                //Creates an Confirmation Alert
+                Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                //Sets the title of the Alert dialog
+                confirmAlert.setTitle("SUCCESS");
+                //Sets the alert header to null
+                confirmAlert.setHeaderText(null);
+                //The contents of the alert
+                confirmAlert.setContentText("The file "+ remoteFile + " has successfully uploaded");
+                //The alert will be displayed until the OK button is clicked
+                confirmAlert.showAndWait();
             }
 
         } catch (IOException ex) {
@@ -347,7 +378,17 @@ public class mainController {
             outputStream1.close();
 
             if (success) {
-                System.out.println("File #1 has been downloaded successfully.");
+                //Creates an Information Alert
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                //Sets the title of the Alert dialog
+                alert.setTitle("SUCCESS");
+                //Sets the alert header to null
+                alert.setHeaderText(null);
+                //The contents of the alert
+                alert.setContentText("The file "+ downloadFile + " has successfully dowloaded");
+                //The alert will be displayed until the OK button is clicked
+                alert.showAndWait();
+
             }
         }
         catch (IOException ex) {
