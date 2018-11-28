@@ -9,6 +9,8 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="mainStage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mainController">
@@ -46,5 +48,23 @@
       <Button fx:id="downBtn" layoutX="305.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#downloadFile" prefHeight="25.0" prefWidth="36.0" text="&lt;--" AnchorPane.bottomAnchor="38.66666666666667" AnchorPane.topAnchor="336.0" />
       <Label layoutX="295.0" layoutY="306.0" text="Download" AnchorPane.bottomAnchor="76.66666666666669" AnchorPane.topAnchor="306.0" />
       <Label layoutX="303.0" layoutY="167.0" text="Upload" />
+      <Button fx:id="localRefresh" layoutX="251.0" layoutY="122.0" mnemonicParsing="false" onAction="#localDirectoryRefresh" prefHeight="25.0" prefWidth="32.0">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@refresh-arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="serverRefresh" layoutX="601.0" layoutY="122.0" mnemonicParsing="false" onAction="#serverDirectoryRefresh" prefHeight="25.0" prefWidth="32.0">
+         <graphic>
+            <ImageView fitHeight="16.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@refresh-arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

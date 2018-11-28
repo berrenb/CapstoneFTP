@@ -53,7 +53,13 @@ public class mainController {
     @FXML
     private ProgressBar status;
 
-    //Variables needed for connection to the server
+    @FXML
+    private Button localRefresh;
+
+    @FXML
+    private Button serverRefresh;
+
+    //Variables needed for FTP purposes
     private FTPClient ftp =null;
     private String host = null;
     private String user = null;
@@ -62,6 +68,10 @@ public class mainController {
     private int reply = 0;
     private String localDir = null;
     private String remoteDir = null;
+    private ObservableList<String> localList = null;
+    private ObservableList<String> remoteList = null;
+    private String[] localNames = null;
+    private String[] serverNames = null;
 
     /*
         The method, clientConnect, takes no arguments and doesn't return anything.
@@ -94,21 +104,16 @@ public class mainController {
 
 
         //Creates an ObservableList which holds folders/files in the directory
-        ObservableList<String> fileList = FXCollections.observableArrayList();
+        remoteList = FXCollections.observableArrayList();
 
-
-
-
+        serverNames = ftp.listNames();
         remoteDir = ftp.printWorkingDirectory();
-        System.out.println(remoteDir);
-
-        String[] names = ftp.listNames();
-        myServerFolder.setItems(fileList);
-        for(String name : names){
-            fileList.add(name);
+        //myServerFolder.setItems(fileList);
+        for(String name : serverNames){
+            remoteList.add(name);
         }
         //Displays the items
-        myServerFolder.setItems(fileList);
+        myServerFolder.setItems(remoteList);
         //Obtains the reply code
         reply = ftp.getReplyCode();
 
@@ -130,6 +135,10 @@ public class mainController {
             alert.setContentText("There was an issue connecting. Please try again");
             //The alert will be displayed until the OK button is clicked
             alert.showAndWait();
+
+            hostID.setText("");
+            userID.setText("");
+            passID.setText("");
         }
 
 
@@ -175,9 +184,13 @@ public class mainController {
             //The alert will be displayed until the OK button is clicked
             alert.showAndWait();
 
+            hostID.setText("");
+            userID.setText("");
+            passID.setText("");
+
         }
 
-        System.out.println();
+
 
 
     }
@@ -215,26 +228,22 @@ public class mainController {
         File file = dir.showDialog(stage);
 
         //Creates an ObservableList which will store the files in the directory
-        ObservableList<String> fileList = FXCollections.observableArrayList();
-
-
-        status.setProgress(0);
+        localList = FXCollections.observableArrayList();
 
 
         localDir = file.toString();
         //If there is content, display them into myFolder
         if (file != null) {
             //Adds the files to an array
-            String[] files = file.list();
+            String[] localNames = file.list();
 
             //For each element of the array, files, add them to the fileList
-            for (String string : files) {
-                status.setProgress(files.length);
-                fileList.add(string);
+            for (String string : localNames) {
+                localList.add(string);
             }
 
             //Displays the items
-            myFolder.setItems(fileList);
+            myFolder.setItems(localList);
 
             //Creates an Information Alert
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -247,7 +256,7 @@ public class mainController {
             //The alert will be displayed until the OK button is clicked
             alert.showAndWait();
 
-            status.setProgress(0);
+
         }
     }
 
@@ -283,7 +292,7 @@ public class mainController {
 
             //Connect to the server
             ftp.connect(host, port);
-            status.setProgress(0);
+
 
             //Login with the username and password
             ftp.login(user, pass);
@@ -294,53 +303,50 @@ public class mainController {
             //Sets file type of files transferred
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
 
-            //Creates a new scanner object
-            Scanner scan = new Scanner(System.in);
-            System.out.println("Enter the name of the file in the directory");
-
             //Stores the file chosen in localFile
-            File localFile = new File(localDir + "/" +scan.nextLine());
+            ObservableList<String> upFile;
+            upFile = myFolder.getSelectionModel().getSelectedItems();
 
-            System.out.println("Enter the new name of the file on the remote directory");
+            for(String x:upFile) {
 
-            //Stores the new name of the file to be uploaded to the server
-            String remoteFile = (remoteDir + "/" + scan.nextLine());
-            InputStream inputStream = new FileInputStream(localFile);
+                File localFile = new File(localDir + "/" + x);
+                status.setProgress(0.25F);
+                //Stores the new name of the file to be uploaded to the server
+                String remoteFile = (remoteDir + "/" + x);
+                status.setProgress(0.50F);
+                InputStream inputStream = new FileInputStream(localFile);
+                status.setProgress(0.75F);
+                boolean done = ftp.storeFile(remoteFile, inputStream);
+                inputStream.close();
 
-
-
-            //Creates an Confirmation Alert
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            //Sets the title of the Alert dialog
-            alert.setTitle(null);
-            //Sets the alert header to null
-            alert.setHeaderText(null);
-            //The contents of the alert
-            alert.setContentText("Beginning to upload "+ remoteFile);
-            //The alert will be displayed until the OK button is clicked
-            alert.showAndWait();
-
-
-
-
-            boolean done = ftp.storeFile(remoteFile, inputStream);
-            inputStream.close();
-
-            if (done) {
-                //Creates an Confirmation Alert
-                Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-                //Sets the title of the Alert dialog
-                confirmAlert.setTitle("SUCCESS");
-                //Sets the alert header to null
-                confirmAlert.setHeaderText(null);
-                //The contents of the alert
-                confirmAlert.setContentText("The file "+ remoteFile + " has successfully uploaded");
-                //The alert will be displayed until the OK button is clicked
-                confirmAlert.showAndWait();
+                if (done) {
+                    status.setProgress(1F);
+                    //Creates an Confirmation Alert
+                    Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                    //Sets the title of the Alert dialog
+                    confirmAlert.setTitle("SUCCESS");
+                    //Sets the alert header to null
+                    confirmAlert.setHeaderText(null);
+                    //The contents of the alert
+                    confirmAlert.setContentText("The file " + x + " has successfully uploaded");
+                    //The alert will be displayed until the OK button is clicked
+                    confirmAlert.showAndWait();
+                    status.setProgress(0);
+                }
             }
 
         } catch (IOException ex) {
-            System.out.println("Error: " + ex.getMessage());
+            //Creates an Confirmation Alert
+            Alert ioAlert = new Alert(Alert.AlertType.ERROR);
+            //Sets the title of the Alert dialog
+            ioAlert.setTitle("ERROR");
+            //Sets the alert header to null
+            ioAlert.setHeaderText(null);
+            //The contents of the alert
+            ioAlert.setContentText(ex.getMessage());
+            //The alert will be displayed until the OK button is clicked
+            ioAlert.showAndWait();
+
             ex.printStackTrace();
         } finally {
             try {
@@ -362,37 +368,48 @@ public class mainController {
             ftp.enterLocalPassiveMode();
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
 
-            Scanner scan = new Scanner(System.in);
-            System.out.println("Enter the name of the remote file: ");
-            // APPROACH #1: using retrieveFile(String, OutputStream) "/httpdocs/index.html"
-            String remoteFile = (remoteDir + "/" + scan.nextLine());
+            ObservableList<String> downFile;
+            downFile = myServerFolder.getSelectionModel().getSelectedItems();
 
-            System.out.println("Enter the destination file path: ");
-            //"C:/Users/Bryan/Documents/FTPClient/index.html"
-            File downloadFile = new File(localDir + "/" + scan.nextLine());
+            for(String x:downFile) {
+                String remoteFile = (remoteDir + "/" + x);
 
 
-            OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile));
+                File downloadFile = new File(localDir + "/" + x);
 
-            boolean success = ftp.retrieveFile(remoteFile, outputStream1);
-            outputStream1.close();
 
-            if (success) {
-                //Creates an Information Alert
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                //Sets the title of the Alert dialog
-                alert.setTitle("SUCCESS");
-                //Sets the alert header to null
-                alert.setHeaderText(null);
-                //The contents of the alert
-                alert.setContentText("The file "+ downloadFile + " has successfully dowloaded");
-                //The alert will be displayed until the OK button is clicked
-                alert.showAndWait();
+                OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile));
 
+                boolean success = ftp.retrieveFile(remoteFile, outputStream1);
+                outputStream1.close();
+
+                if (success) {
+                    //Creates an Information Alert
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    //Sets the title of the Alert dialog
+                    alert.setTitle("SUCCESS");
+                    //Sets the alert header to null
+                    alert.setHeaderText(null);
+                    //The contents of the alert
+                    alert.setContentText("The file " + downloadFile + " has successfully dowloaded");
+                    //The alert will be displayed until the OK button is clicked
+                    alert.showAndWait();
+
+                }
             }
         }
         catch (IOException ex) {
-            System.out.println("Error: " + ex.getMessage());
+            //Creates an Error Alert
+            Alert ioAlert = new Alert(Alert.AlertType.ERROR);
+            //Sets the title of the Alert dialog
+            ioAlert.setTitle("ERROR");
+            //Sets the alert header to null
+            ioAlert.setHeaderText(null);
+            //The contents of the alert
+            ioAlert.setContentText(ex.getMessage());
+            //The alert will be displayed until the OK button is clicked
+            ioAlert.showAndWait();
+
             ex.printStackTrace();
         } finally {
             try {
@@ -405,6 +422,42 @@ public class mainController {
             }
         }
     }
+
+    public void localDirectoryRefresh(){
+
+    }
+
+    public void serverDirectoryRefresh() {
+        try {
+            //Creates an FTP Client
+            ftp = new FTPClient();
+
+            //Connects to the host
+            ftp.connect(host, port);
+
+            System.out.println(ftp.getReplyString());
+            //login into server
+            ftp.login(user, pass);
+
+
+            //Creates an ObservableList which holds folders/files in the directory
+            remoteList = FXCollections.observableArrayList();
+
+            serverNames = ftp.listNames();
+            remoteDir = ftp.printWorkingDirectory();
+            //myServerFolder.setItems(fileList);
+            for (String name : serverNames) {
+                remoteList.add(name);
+            }
+            //Displays the items
+            myServerFolder.setItems(remoteList);
+        }
+        catch(Exception e){
+            System.out.println("There was an error");
+        }
+    }
+
+
 
     /*
         The method, closeProgram, does not take any arguments and does not return anything.

@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FTP/ftpGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FTP/ftpGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FTP/mainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FTP/mainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ftpGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ftpGUI.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/mainController.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
@@ -90,28 +94,29 @@
     <session id="1900343436">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="14" />
           <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.122" value="1" />
           <entry key="project.open.time.41" value="1" />
-          <entry key="project.open.time.42" value="3" />
+          <entry key="project.open.time.42" value="4" />
           <entry key="project.open.time.47" value="1" />
           <entry key="project.open.time.6" value="2" />
-          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.7" value="3" />
+          <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="18" />
+          <entry key="project.opened" value="21" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="6496" />
+          <entry key="java" value="7538" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6496" />
+          <entry key="JAVA" value="7538" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -176,8 +181,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="324" selection-start-line="324" selection-end-line="324" />
+            <state relative-caret-position="170">
+              <caret line="312" column="37" selection-start-line="312" selection-start-column="37" selection-end-line="312" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,6 +195,10 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>status</find>
+      <find>localDir</find>
+      <find>remoteDir</find>
+      <find>files</find>
+      <find>names</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -211,9 +223,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="243" />
-    <option name="y" value="195" />
-    <option name="width" value="696" />
+    <option name="x" value="-7" />
+    <option name="width" value="694" />
     <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -258,7 +269,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543184977378" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543418418866" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="E:/jre-10.0.2" />
     <property name="project.structure.last.edited" value="SDKs" />
@@ -374,9 +385,10 @@
     <option name="totallyTimeSpent" value="1302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.094736844" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.10030395" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -385,7 +397,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33274022" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3295082" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -396,7 +408,7 @@
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32740214" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32459018" />
       <window_info anchor="bottom" id="Terminal" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -426,8 +438,8 @@
     <entry file="file://$PROJECT_DIR$/src/sample/Controller.java" />
     <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/jdk/internal/reflect/NativeMethodAccessorImpl.java" />
     <entry file="file://$PROJECT_DIR$/src/ftpGUI.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
       <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
@@ -470,8 +482,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mainController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="324" selection-start-line="324" selection-end-line="324" />
+        <state relative-caret-position="170">
+          <caret line="312" column="37" selection-start-line="312" selection-start-column="37" selection-end-line="312" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
