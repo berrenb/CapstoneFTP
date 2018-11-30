@@ -72,6 +72,7 @@ public class mainController {
     private ObservableList<String> remoteList = null;
     private String[] localNames = null;
     private String[] serverNames = null;
+    private File file = null;
 
     /*
         The method, clientConnect, takes no arguments and doesn't return anything.
@@ -235,7 +236,7 @@ public class mainController {
         //If there is content, display them into myFolder
         if (file != null) {
             //Adds the files to an array
-            String[] localNames = file.list();
+            localNames = file.list();
 
             //For each element of the array, files, add them to the fileList
             for (String string : localNames) {
@@ -377,6 +378,7 @@ public class mainController {
 
                 File downloadFile = new File(localDir + "/" + x);
 
+                localList.add(x);
 
                 OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile));
 
@@ -424,7 +426,21 @@ public class mainController {
     }
 
     public void localDirectoryRefresh(){
+        try{
+            myFolder.getItems().clear();
+                //For each element of the array, files, add them to the fileList
+                for (String string : localNames) {
+                    localList.add(string);
+                }
 
+                //Displays the items
+                myFolder.setItems(localList);
+
+
+        }
+        catch(Exception e){
+            System.out.println("There was an error");
+        }
     }
 
     public void serverDirectoryRefresh() {
