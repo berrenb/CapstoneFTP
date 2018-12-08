@@ -16,11 +16,9 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 import org.apache.commons.net.ftp.FTP;
-import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 import org.apache.commons.net.ftp.FTPClient;
 
-import java.util.Scanner;
 import java.io.*;
 
 
@@ -82,136 +80,116 @@ public class mainController {
      */
 
     public void clientConnect() throws IOException {
-        //Gets the contents in hostId TextField
+
         host = hostID.getText();
-        //Gets the contents in userID TextField
+
         user = userID.getText();
-        //Gets the contents in passID TextField
+
         pass = passID.getText();
-        //Gets the contents in portID TextField
+
         port = Integer.parseInt(portID.getText());
 
+        try {
 
-    try {
-        //Creates an FTP Client
-        ftp = new FTPClient();
+            ftp = new FTPClient();
 
-        //Connects to the host
-        ftp.connect(host, port);
+            ftp.connect(host, port);
 
-        System.out.println(ftp.getReplyString());
-        //login into server
-        ftp.login(user, pass);
+            ftp.login(user, pass);
 
+            remoteList = FXCollections.observableArrayList();
 
-        //Creates an ObservableList which holds folders/files in the directory
-        remoteList = FXCollections.observableArrayList();
+            serverNames = ftp.listNames();
 
-        serverNames = ftp.listNames();
-        remoteDir = ftp.printWorkingDirectory();
-        //myServerFolder.setItems(fileList);
-        for(String name : serverNames){
-            remoteList.add(name);
+            remoteDir = ftp.printWorkingDirectory();
+
+            for(String name : serverNames){
+                remoteList.add(name);
+            }
+
+            myServerFolder.setItems(remoteList);
+
+            reply = ftp.getReplyCode();
+
+            ftp.enterLocalPassiveMode();
+
+            if (!FTPReply.isPositiveCompletion(reply)) {
+                ftp.disconnect();
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+
+                alert.setTitle("ERROR");
+
+                alert.setHeaderText(null);
+
+                alert.setContentText("There was an issue connecting. Please try again");
+
+                alert.showAndWait();
+
+                hostID.setText("");
+                userID.setText("");
+                passID.setText("");
+            }
+
+            else {
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+                alert.setTitle("SUCCESS");
+
+                alert.setHeaderText(null);
+
+                alert.setContentText("You're connected to: " + host);
+
+                alert.showAndWait();
+            }
+
+            if (ftp.login(user, pass) == false){
+                ftp.disconnect();
+
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+
+                alert.setTitle("ERROR");
+
+                alert.setHeaderText(null);
+
+                alert.setContentText("The username or password was incorrect");
+
+                alert.showAndWait();
+
+                userID.setText("");
+                passID.setText("");
+            }
+
+            else{
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+                alert.setTitle("SUCCESS");
+
+                alert.setHeaderText(null);
+
+                alert.setContentText("The username and password was correct!");
+
+                alert.showAndWait();
+
+                hostID.setText("");
+                userID.setText("");
+                passID.setText("");
+            }
         }
-        //Displays the items
-        myServerFolder.setItems(remoteList);
-        //Obtains the reply code
-        reply = ftp.getReplyCode();
-
-        ftp.enterLocalPassiveMode();
-
-
-
-        System.out.println(ftp.getStatus());
-        //If the reply code is negative value, the connection failed
-        if (!FTPReply.isPositiveCompletion(reply)) {
+        catch(Exception e) {
             ftp.disconnect();
-            //Creates an Information Alert
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            //Sets the title of the Alert dialog
+
             alert.setTitle("ERROR");
-            //Sets the alert header to null
+
             alert.setHeaderText(null);
-            //The contents of the alert
-            alert.setContentText("There was an issue connecting. Please try again");
-            //The alert will be displayed until the OK button is clicked
-            alert.showAndWait();
 
-            hostID.setText("");
-            userID.setText("");
-            passID.setText("");
-        }
+            alert.setContentText("I'm sorry. There was an unknown error");
 
-
-        //If the connection is successful, login
-        else {
-            //Creates an Information Alert
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            //Sets the title of the Alert dialog
-            alert.setTitle("SUCCESS");
-            //Sets the alert header to null
-            alert.setHeaderText(null);
-            //The contents of the alert
-            alert.setContentText("You're connected to: " + host);
-            //The alert will be displayed until the OK button is clicked
             alert.showAndWait();
         }
-        if (ftp.login(user, pass) == false){
-            ftp.disconnect();
-            //Creates an Information Alert
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            //Sets the title of the Alert dialog
-            alert.setTitle("ERROR");
-            //Sets the alert header to null
-            alert.setHeaderText(null);
-            //The contents of the alert
-            alert.setContentText("The username or password was incorrect");
-            //The alert will be displayed until the OK button is clicked
-            alert.showAndWait();
-
-            userID.setText("");
-            passID.setText("");
-
-        }
-        else{
-            //Creates an Information Alert
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            //Sets the title of the Alert dialog
-            alert.setTitle("SUCCESS");
-            //Sets the alert header to null
-            alert.setHeaderText(null);
-            //The contents of the alert
-            alert.setContentText("The username and password was correct!");
-            //The alert will be displayed until the OK button is clicked
-            alert.showAndWait();
-
-            hostID.setText("");
-            userID.setText("");
-            passID.setText("");
-
-        }
-
-
-
-
     }
-    catch(Exception e) {
-        ftp.disconnect();
-        //Creates an Information Alert
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        //Sets the title of the Alert dialog
-        alert.setTitle("ERROR");
-        //Sets the alert header to null
-        alert.setHeaderText(null);
-        //The contents of the alert
-        alert.setContentText("I'm sorry. There was an unknown error");
-        //The alert will be displayed until the OK button is clicked
-        alert.showAndWait();
-    }
-
-
-
-        }
 
     /*
         The method, openFolder, takes no arguments and doesn't return anything.
@@ -219,44 +197,37 @@ public class mainController {
         into the ListView, myFolder.
      */
     public void openFolder(){
-        //Creates a DirectoryChooser
+
         final DirectoryChooser dir = new DirectoryChooser();
 
-        //Sets the stage to the file browser
-        Stage stage = (Stage) mainStage.getScene().getWindow();
 
+        Stage stage = (Stage) mainStage.getScene().getWindow();
 
         File file = dir.showDialog(stage);
 
-        //Creates an ObservableList which will store the files in the directory
         localList = FXCollections.observableArrayList();
 
-
         localDir = file.toString();
-        //If there is content, display them into myFolder
+
         if (file != null) {
-            //Adds the files to an array
+
             localNames = file.list();
 
-            //For each element of the array, files, add them to the fileList
             for (String string : localNames) {
                 localList.add(string);
             }
 
-            //Displays the items
             myFolder.setItems(localList);
 
-            //Creates an Information Alert
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            //Sets the title of the Alert dialog
-            alert.setTitle("COMPLETE");
-            //Sets the alert header to null
-            alert.setHeaderText(null);
-            //The contents of the alert
-            alert.setContentText("Directory: " + file);
-            //The alert will be displayed until the OK button is clicked
-            alert.showAndWait();
 
+            alert.setTitle("COMPLETE");
+
+            alert.setHeaderText(null);
+
+            alert.setContentText("Directory: " + file);
+
+            alert.showAndWait();
 
         }
     }
@@ -268,18 +239,17 @@ public class mainController {
      */
     public void aboutProgram() {
 
-        //Creates an Information Alert
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        //Sets the title of the Alert dialog
+
         alert.setTitle("About this program");
-        //Sets the alert header to null
+
         alert.setHeaderText(null);
-        //The contents of the alert
+
         alert.setContentText("This program will perform a successful File Transfer" +
                 "\n" + "To do this, first select your local folder under file." + "\n" +
                 "Next, enter the host, username, and password to connect to the website directory. The port is defaulted to Port 21."
                 + "\n" + "Finally, select the file you wish to upload or download and click the corresponding button.");
-        //The alert will be displayed until the OK button is clicked
+
         alert.showAndWait();
     }
 
@@ -291,20 +261,14 @@ public class mainController {
 
         try {
 
-            //Connect to the server
             ftp.connect(host, port);
 
-
-            //Login with the username and password
             ftp.login(user, pass);
 
-            //This line is used so you are able to transfer files
             ftp.enterLocalPassiveMode();
 
-            //Sets file type of files transferred
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
 
-            //Stores the file chosen in localFile
             ObservableList<String> upFile;
             upFile = myFolder.getSelectionModel().getSelectedItems();
 
@@ -312,40 +276,44 @@ public class mainController {
 
                 File localFile = new File(localDir + "/" + x);
                 status.setProgress(0.25F);
-                //Stores the new name of the file to be uploaded to the server
+
                 String remoteFile = (remoteDir + "/" + x);
                 status.setProgress(0.50F);
+
                 InputStream inputStream = new FileInputStream(localFile);
                 status.setProgress(0.75F);
+
                 boolean done = ftp.storeFile(remoteFile, inputStream);
                 inputStream.close();
 
                 if (done) {
                     status.setProgress(1F);
-                    //Creates an Confirmation Alert
+
+                    remoteList.add(x);
+
                     Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-                    //Sets the title of the Alert dialog
+
                     confirmAlert.setTitle("SUCCESS");
-                    //Sets the alert header to null
+
                     confirmAlert.setHeaderText(null);
-                    //The contents of the alert
+
                     confirmAlert.setContentText("The file " + x + " has successfully uploaded");
-                    //The alert will be displayed until the OK button is clicked
+
                     confirmAlert.showAndWait();
-                    status.setProgress(0);
+
+                    status.setProgress(0F);
                 }
             }
 
         } catch (IOException ex) {
-            //Creates an Confirmation Alert
             Alert ioAlert = new Alert(Alert.AlertType.ERROR);
-            //Sets the title of the Alert dialog
+
             ioAlert.setTitle("ERROR");
-            //Sets the alert header to null
+
             ioAlert.setHeaderText(null);
-            //The contents of the alert
+
             ioAlert.setContentText(ex.getMessage());
-            //The alert will be displayed until the OK button is clicked
+
             ioAlert.showAndWait();
 
             ex.printStackTrace();
@@ -361,55 +329,66 @@ public class mainController {
         }
     }
 
-
+/*
+    The method, downloadFile, does not take any arguments and does not return anything. The purpose of this
+    method is to download a file from the remote directory to the local directory.
+ */
     public void downloadFile(){
         try {
             ftp.connect(host, port);
+
             ftp.login(user, pass);
+
             ftp.enterLocalPassiveMode();
+
             ftp.setFileType(FTP.BINARY_FILE_TYPE);
 
             ObservableList<String> downFile;
             downFile = myServerFolder.getSelectionModel().getSelectedItems();
 
             for(String x:downFile) {
-                String remoteFile = (remoteDir + "/" + x);
 
+                String remoteFile = (remoteDir + "/" + x);
+                status.setProgress(0.25F);
 
                 File downloadFile = new File(localDir + "/" + x);
+                status.setProgress(0.50F);
 
                 localList.add(x);
 
                 OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile));
+                status.setProgress(0.75F);
 
                 boolean success = ftp.retrieveFile(remoteFile, outputStream1);
                 outputStream1.close();
 
                 if (success) {
-                    //Creates an Information Alert
+                    status.setProgress(1F);
+
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    //Sets the title of the Alert dialog
+
                     alert.setTitle("SUCCESS");
-                    //Sets the alert header to null
+
                     alert.setHeaderText(null);
-                    //The contents of the alert
+
                     alert.setContentText("The file " + downloadFile + " has successfully dowloaded");
-                    //The alert will be displayed until the OK button is clicked
+
                     alert.showAndWait();
 
+                    status.setProgress(0F);
                 }
             }
         }
         catch (IOException ex) {
-            //Creates an Error Alert
+
             Alert ioAlert = new Alert(Alert.AlertType.ERROR);
-            //Sets the title of the Alert dialog
+
             ioAlert.setTitle("ERROR");
-            //Sets the alert header to null
+
             ioAlert.setHeaderText(null);
-            //The contents of the alert
+
             ioAlert.setContentText(ex.getMessage());
-            //The alert will be displayed until the OK button is clicked
+
             ioAlert.showAndWait();
 
             ex.printStackTrace();
@@ -424,55 +403,77 @@ public class mainController {
             }
         }
     }
-
+    /*
+        The method, localDirectoryRefresh, does not take any arguments and does not return anything. The purpose of this
+        method is to refresh the list of files on the local directory.
+     */
     public void localDirectoryRefresh(){
         try{
             myFolder.getItems().clear();
-                //For each element of the array, files, add them to the fileList
-                for (String string : localNames) {
-                    localList.add(string);
+            File folder = new File(localDir);
+
+                for (File fileEntry: folder.listFiles()) {
+                    localList.add(fileEntry.getName());
                 }
 
-                //Displays the items
+
                 myFolder.setItems(localList);
 
+    }
+        catch(Exception ex){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
 
-        }
-        catch(Exception e){
-            System.out.println("There was an error");
+            alert.setTitle("ERROR");
+
+            alert.setHeaderText(null);
+
+            alert.setContentText(ex.getMessage());
+
+            alert.showAndWait();
+
+            ex.printStackTrace();
         }
     }
-
+    /*
+        The method, serverDirectoryRefresh, does not take any arguments and does not return anything. The purpose of this
+        method is to refresh the list of files on the server directory.
+     */
     public void serverDirectoryRefresh() {
         try {
-            //Creates an FTP Client
+
             ftp = new FTPClient();
 
-            //Connects to the host
             ftp.connect(host, port);
 
             System.out.println(ftp.getReplyString());
-            //login into server
+
             ftp.login(user, pass);
 
-
-            //Creates an ObservableList which holds folders/files in the directory
             remoteList = FXCollections.observableArrayList();
 
             serverNames = ftp.listNames();
             remoteDir = ftp.printWorkingDirectory();
-            //myServerFolder.setItems(fileList);
+
             for (String name : serverNames) {
                 remoteList.add(name);
             }
-            //Displays the items
+
             myServerFolder.setItems(remoteList);
         }
-        catch(Exception e){
-            System.out.println("There was an error");
+        catch(Exception ex){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+
+            alert.setTitle("ERROR");
+
+            alert.setHeaderText(null);
+
+            alert.setContentText(ex.getMessage());
+
+            alert.showAndWait();
+
+            ex.printStackTrace();
         }
     }
-
 
 
     /*
@@ -480,9 +481,8 @@ public class mainController {
         The purpose of this method is to close the program.
      */
     public void closeProgram() {
-        //Closes the window
         Platform.exit();
-        //Finishes the program
+
         System.exit(0);
     }
 
