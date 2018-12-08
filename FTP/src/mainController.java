@@ -371,7 +371,7 @@ public class mainController {
 
                     alert.setHeaderText(null);
 
-                    alert.setContentText("The file " + downloadFile + " has successfully dowloaded");
+                    alert.setContentText("The file " + x + " has successfully dowloaded");
 
                     alert.showAndWait();
 
