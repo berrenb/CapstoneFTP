@@ -275,10 +275,10 @@ public class mainController {
         //Sets the alert header to null
         alert.setHeaderText(null);
         //The contents of the alert
-        alert.setContentText("This will perform a successful File transfer to my website." +
-                "\n" + "To do this, first select you local folder under file." + "\n" +
+        alert.setContentText("This program will perform a successful File Transfer" +
+                "\n" + "To do this, first select your local folder under file." + "\n" +
                 "Next, enter the host, username, and password to connect to the website directory. The port is defaulted to Port 21."
-                + "\n" + "Finally, select your file and drag it into the website directory");
+                + "\n" + "Finally, select the file you wish to upload or download and click the corresponding button.");
         //The alert will be displayed until the OK button is clicked
         alert.showAndWait();
     }
